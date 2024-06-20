@@ -14,7 +14,14 @@ Reference: [CKS Environment](https://docs.linuxfoundation.org/tc-docs/certificat
 
 - [Killer Shell CKS](https://killercoda.com/killer-shell-cks)
 
-### API Server
+## [1. Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/)
+
+- [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
+
+
+Notes:
+
+API server:
 
 ```bash
 - kube-apiserver
@@ -23,21 +30,20 @@ Reference: [CKS Environment](https://docs.linuxfoundation.org/tc-docs/certificat
 - --enable-admission-plugins=NodeRestriction
 ```
 
-
-### Logs
+Logs:
 
 ```bash
 crictl logs <container-id>
 cat /var/log/pods/<pod-id>/<container-name>/0.log
 ```
 
-### Manifests
+Manifests:
 
 ```bash
 cat /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
 
-### Common
+Common:
 
 ```bash
 watch crictl ps
