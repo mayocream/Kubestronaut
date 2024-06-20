@@ -14,9 +14,11 @@ Reference: [CKS Environment](https://docs.linuxfoundation.org/tc-docs/certificat
 
 - [Killer Shell CKS](https://killercoda.com/killer-shell-cks)
 
-## [1. Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/)
-
+[Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/):
 - [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
+- [AppArmor](https://kubernetes.io/docs/tutorials/security/apparmor/)
+    - `apparmor_parser`
+    - `aa-status`
 
 
 Notes:
