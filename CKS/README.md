@@ -24,6 +24,7 @@ Reference: [CKS Environment](https://docs.linuxfoundation.org/tc-docs/certificat
 - [Audit logs](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/#log-backend)
 - [CSR](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#normal-user)
   - [openssl](https://kubernetes.io/docs/tasks/administer-cluster/certificates/#openssl)
+- [EncryptionConfiguration](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration)
 
 Notes:
 
@@ -73,6 +74,12 @@ watch crictl ps
 export KUBECONFIG=/etc/kubernetes/kubelet.conf
 ```
 
+Docker:
+
+```bash
+# shared PID namespace
+docker run --name nginx -d --pid=container:app1 nginx
+```
 
 ## Simulator
 
