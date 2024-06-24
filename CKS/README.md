@@ -26,6 +26,7 @@ Reference: [CKS Environment](https://docs.linuxfoundation.org/tc-docs/certificat
   - `kubectl -n one get secrets -o json | kubectl replace -f -` recreate secrets
 - [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
 - [Security Context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+- [Network Policy](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/)
 
 Notes:
 
