@@ -187,19 +187,111 @@ ETCDCTL_API=3 etcdctl \
 --cacert /etc/kubernetes/pki/etcd/ca.crt get /registry/{type}/{namespace}/{name}
 ```
 
+### Permission escalation
+
+```bash
+k -n restricted get role,rolebinding,clusterrole,clusterrolebinding
+k -n restricted get secrets -o yaml
+
+k -n restricted get pod -o yaml | grep -i secret
+
+# via volume
+k -n restricted exec pod1-fd5d64b9c-pcx6q -- cat /etc/secret-volume/password
+
+# via env
+k -n restricted exec pod2-6494f7699b-4hks5 -- env | grep PASS
+
+# via API
+k -n restricted exec -it pod3-748b48594-24s76 -- sh
+curl https://kubernetes.default/api/v1/namespaces/restricted/secrets -H "Authorization: Bearer $(cat /run/secrets/kubernetes.io/serviceaccount/token)" -k
+```
+
+### Network Policies
+
+- [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: metadata-deny
+  namespace: metadata-access
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+        - 192.168.100.21/32
+```
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: metadata-allow
+  namespace: metadata-access
+spec:
+  podSelector:
+    matchLabels:
+      role: metadata-accessor
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 192.168.100.21/32
+```
+
+### Syscall
+
+```bash
+strace -p <pid>
+```
+
+### Ingress TLS
+
+```bash
+k -n <namespace> create secret tls tls-secret --key tls.key --cert tls.crt
+```
+
+### Audit log
+
+- [Audit log](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
+
+```yaml
+# /etc/kubernetes/audit/policy.yaml
+apiVersion: audit.k8s.io/v1
+kind: Policy
+rules:
+
+# log Secret resources audits, level Metadata
+- level: Metadata
+  resources:
+  - group: ""
+    resources: ["secrets"]
+
+# log node related audits, level RequestResponse
+- level: RequestResponse
+  userGroups: ["system:nodes"]
+
+# for everything else don't log anything
+- level: None
+```
 
 ### Other
 
 [Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/):
 - [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
-
 - [Audit logs](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/#log-backend)
 - [CSR](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#normal-user)
   - [openssl](https://kubernetes.io/docs/tasks/administer-cluster/certificates/#openssl)
 - [EncryptionConfiguration](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration)
   - `kubectl -n one get secrets -o json | kubectl replace -f -` recreate secrets
 - [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
-- [Network Policy](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/)
 
 Notes:
 
