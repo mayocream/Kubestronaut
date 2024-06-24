@@ -5,9 +5,7 @@
 Reference: [CKS Environment](https://docs.linuxfoundation.org/tc-docs/certification/important-instructions-cks#cks-environment)
 
 - One active monitor (either built in or external)  (NOTE: Dual Monitors are NOT supported).
-
 - The CKS environment is currently running etcd v3.5
-
 - The CKS environment is currently running Kubernetes v1.30
 
 ## Training
