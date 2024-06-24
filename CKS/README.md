@@ -24,6 +24,7 @@ Reference: [CKS Environment](https://docs.linuxfoundation.org/tc-docs/certificat
   - [openssl](https://kubernetes.io/docs/tasks/administer-cluster/certificates/#openssl)
 - [EncryptionConfiguration](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration)
 - [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
+- [Security Context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 
 Notes:
 
