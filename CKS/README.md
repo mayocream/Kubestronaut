@@ -23,6 +23,7 @@ Reference: [CKS Environment](https://docs.linuxfoundation.org/tc-docs/certificat
 - [CSR](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#normal-user)
   - [openssl](https://kubernetes.io/docs/tasks/administer-cluster/certificates/#openssl)
 - [EncryptionConfiguration](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration)
+  - `kubectl -n one get secrets -o json | kubectl replace -f -` recreate secrets
 - [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
 - [Security Context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 
